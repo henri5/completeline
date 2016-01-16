@@ -7,9 +7,11 @@ import org.junit.Test;
 import henri5.LineCompleter;
 
 public class LineCompleterTest {
+  
   @Test
   public void testSemiColonMatch() {
     assertTrue(s("new foo()"));
+    assertTrue(s("new foo(bar, baz)"));
     assertTrue(s("int i"));
     assertTrue(s("int i = asd"));
     assertTrue(s("String s = \"endOfLine\""));
@@ -19,6 +21,11 @@ public class LineCompleterTest {
     assertTrue(s("throw foo"));
     assertTrue(s("import foo.bar"));
     assertTrue(s("import static foo.bar.Baz"));
+    assertTrue(s("if (true) return false"));
+    assertTrue(s(" if (foo()) return bar"));
+    //assertTrue(s(" if (foo()) return bar()"));
+    assertTrue(s("Foo.bar(bat())"));
+    assertTrue(s("Foo.bar(baz, bat())"));
 
     assertFalse(s("new foo();"));
     assertFalse(s("void foo()"));
@@ -32,18 +39,21 @@ public class LineCompleterTest {
   @Test
   public void testCurlyBracketMatch() {
     assertTrue(c("public static void foo()"));
+    assertTrue(c("Foo.bar foo()"));
     assertTrue(c("void foo()"));
     assertTrue(c(" if (true)"));
-    assertTrue(c(" if (true) "));
-    assertTrue(c(" while (something) "));
+    assertTrue(c("if (true) "));
+    assertTrue(c("\twhile (something) "));
     assertTrue(c(" else if (true)"));
     assertTrue(c("} else if (true)"));
     assertTrue(c("public static class Foo"));
+    assertTrue(c("public static class Foo implements Bar.Baz"));
     assertTrue(c("protected abstract class Foo extends Bar"));
     assertTrue(c("protected abstract class Foo extends Bar implements Baz"));
     assertTrue(c("interface Foo"));
     assertTrue(c("private interface Foo implements Bar"));
     assertTrue(c("enum Foo"));
+    assertTrue(c("\tfor (int i = 0; i < 100; i++)"));
 
     assertFalse(c("public static int = foo()"));
     assertFalse(c("new foo()"));
@@ -58,6 +68,8 @@ public class LineCompleterTest {
     assertFalse(c("public static class Foo {"));
     assertFalse(c("void foo() {"));
     assertFalse(c("public classic Foo"));
+    assertFalse(c("Foo.bar(Baz.class)"));
+    assertFalse(c("Foo.bar(bat())"));
   }
 
   private boolean c(String string) {

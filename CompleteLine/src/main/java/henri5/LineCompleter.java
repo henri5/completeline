@@ -74,15 +74,15 @@ public class LineCompleter {
 
   public static boolean canInsertCurlyBrackets(String line) {
     // for try/else/finally
-    if (line.matches("^.*[ \t](else|finally|try)[ ]?$")) {
+    if (line.matches("^.*(?<![A-Za-z0-9])(else|finally|try)[ ]?$")) {
       return true;
     }
-    // for if/catch/while
-    if (line.matches("^.*[ \t](if|catch|while) \\(.*\\)[ ]?$")) {
+    // for if/catch/while/for
+    if (line.matches("^.*(?<![A-Za-z0-9])(if|catch|while|for) \\(.*\\)[ ]?$")) {
       return true;
     }
     // for method declaration
-    if (line.matches("^[^=]*?[ ]?(?<!(new|throw))[ ][A-Za-z0-9]+?\\(.*\\)[ ]?$")) {
+    if (line.matches("^[^=,]*?[ ]?(?<!(new|throw))[ ][A-Za-z0-9]+?\\(.*\\)[ ]?$")) {
       return true;
     }
     // for class/interface/enum declaration
