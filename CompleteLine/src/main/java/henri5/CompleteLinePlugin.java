@@ -3,12 +3,12 @@ package henri5;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-public class Activator extends AbstractUIPlugin {
+public class CompleteLinePlugin extends AbstractUIPlugin {
 
   public static final String PLUGIN_ID = "CompleteLine";
-  private static Activator plugin;
+  private static CompleteLinePlugin plugin;
 
-  public Activator() {
+  public CompleteLinePlugin() {
   }
 
   public void start(BundleContext context) throws Exception {
@@ -21,7 +21,7 @@ public class Activator extends AbstractUIPlugin {
     super.stop(context);
   }
 
-  public static Activator getDefault() {
+  public static CompleteLinePlugin getDefault() {
     return plugin;
   }
 }

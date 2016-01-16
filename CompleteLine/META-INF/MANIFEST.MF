@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Complete Line Plug-in
 Bundle-SymbolicName: CompleteLine;singleton:=true
 Bundle-Version: 0.0.1.qualifier
-Bundle-Activator: henri5.Activator
+Bundle-Activator: henri5.CompleteLinePlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.ui.editors,
