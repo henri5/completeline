@@ -17,14 +17,14 @@ public class LineCompleter {
       String intentation = getIntentation(line);
       goToEndOfCurrentLine();
       insert((line.endsWith(" ") ? "" : " ") + "{" + EOL + EOL + intentation + "}");
-      nextLine();
+      goToNextLine();
       insert(intentation); // IDE automatically actually adds extra intentation
       goToEndOfCurrentLine();
     }
     else if (canInsertSemicolon(line)) {
       goToEndOfCurrentLine();
       insert(";" + EOL + getIntentation(line));
-      nextLine();
+      goToNextLine();
       goToEndOfCurrentLine();
     }
   }
@@ -52,7 +52,7 @@ public class LineCompleter {
     styledText.setCaretOffset(getLineOffsetPosition(getCurrentCaretLine()) + line.length());
   }
 
-  private void nextLine() {
+  private void goToNextLine() {
     styledText.setCaretOffset(getLineOffsetPosition(getCurrentCaretLine() + 1));
   }
 
