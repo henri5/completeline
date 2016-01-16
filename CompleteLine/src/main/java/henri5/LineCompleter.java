@@ -77,7 +77,7 @@ public class LineCompleter {
     if (line.matches("^.*[ \t](else|finally|try)[ ]?$")) {
       return true;
     }
-    // for if/catch/while (foo)
+    // for if/catch/while
     if (line.matches("^.*[ \t](if|catch|while) \\(.*\\)[ ]?$")) {
       return true;
     }
@@ -86,7 +86,7 @@ public class LineCompleter {
       return true;
     }
     // for class/interface/enum declaration
-    if (line.matches("^.*(?<![A-Za-z0-9])(class|interface|enum)[ ].*[^{]$")) {
+    if (line.matches("^.*(?<![A-Za-z0-9])(class|interface|enum) .*[^{]$")) {
       return true;
     }
     return false;

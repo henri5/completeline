@@ -53,6 +53,11 @@ public class LineCompleterTest {
     assertFalse(c("enum"));
     assertFalse(c("throw foo()"));
     assertFalse(c(" functionif (true)"));
+    assertFalse(c(" if (true) {"));
+    assertFalse(c("enum Foo {"));
+    assertFalse(c("public static class Foo {"));
+    assertFalse(c("void foo() {"));
+    assertFalse(c("public classic Foo"));
   }
 
   private boolean c(String string) {
