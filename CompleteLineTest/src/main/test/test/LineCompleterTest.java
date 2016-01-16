@@ -17,6 +17,8 @@ public class LineCompleterTest {
     assertTrue(s("String s = \"endOfLine;\".toString()"));
     assertTrue(s("throw foo()"));
     assertTrue(s("throw foo"));
+    assertTrue(s("import foo.bar"));
+    assertTrue(s("import static foo.bar.Baz"));
 
     assertFalse(s("new foo();"));
     assertFalse(s("void foo()"));
