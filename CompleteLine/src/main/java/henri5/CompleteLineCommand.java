@@ -21,10 +21,8 @@ public class CompleteLineCommand implements IHandler {
 
   public Object execute(ExecutionEvent event) throws ExecutionException {
     Control control = getEditorControl();
-    if (control != null) {
-      if (control instanceof StyledText) {
-        new LineCompleter((StyledText) control).completeLine();
-      }
+    if (control instanceof StyledText) {
+      new LineCompleter((StyledText) control).completeLine();
     }
     return null;
   }
