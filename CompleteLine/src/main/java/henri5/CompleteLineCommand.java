@@ -13,25 +13,27 @@ import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
 
 public class CompleteLineCommand implements IHandler {
 
-	public void addHandlerListener(IHandlerListener handlerListener) {}
+  public void addHandlerListener(IHandlerListener handlerListener) {
+  }
 
-	public void dispose() {}
+  public void dispose() {
+  }
 
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-	  Control control = getEditorControl();
-	  if (control != null) {
+  public Object execute(ExecutionEvent event) throws ExecutionException {
+    Control control = getEditorControl();
+    if (control != null) {
       if (control instanceof StyledText) {
         new LineCompleter((StyledText) control).completeLine();
       }
-	  }
-		return null;
-	}
+    }
+    return null;
+  }
 
-	public boolean isEnabled() {
-		return getEditorControl() != null;
-	}
-	
-	private Control getEditorControl() {
+  public boolean isEnabled() {
+    return getEditorControl() != null;
+  }
+
+  private Control getEditorControl() {
     IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
     if (activeWorkbenchWindow == null) {
       return null;
@@ -42,11 +44,12 @@ public class CompleteLineCommand implements IHandler {
       return (Control) editor.getAdapter(Control.class);
     }
     return null;
-	}
+  }
 
-	public boolean isHandled() {
-		return isEnabled();
-	}
+  public boolean isHandled() {
+    return isEnabled();
+  }
 
-	public void removeHandlerListener(IHandlerListener handlerListener) {}
+  public void removeHandlerListener(IHandlerListener handlerListener) {
+  }
 }
