@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.eclipse.ui.category.textEditor"
+            defaultHandler="henri5.CompleteLineCommand"
+            id="Henri5.CompleteLine"
+            name="Try to complete line">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="Henri5.CompleteLine"
+            contextId="org.eclipse.jdt.ui.javaEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M2+ENTER">
+      </key>
+   </extension>
+
+</plugin>

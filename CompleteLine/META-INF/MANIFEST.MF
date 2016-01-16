@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Complete Line Plug-in
+Bundle-SymbolicName: CompleteLine;singleton:=true
+Bundle-Version: 0.0.1.qualifier
+Bundle-Activator: henri5.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.editors,
+ org.eclipse.jface.text
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: henri5
+Bundle-Vendor: Henri Viik

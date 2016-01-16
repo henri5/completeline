@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/CompleteLine_0.0.1.201601161617.jar" id="CompleteLine" version="0.0.1.201601161617">
+      <category name="Henri5.CompleteLine"/>
+   </feature>
+   <category-def name="Henri5.CompleteLine" label="CompleteLine">
+      <description>
+         Shamelessly tries to mock IJ&apos;s complete line behaviour.
+      </description>
+   </category-def>
+</site>
