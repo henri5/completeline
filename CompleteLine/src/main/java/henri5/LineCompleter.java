@@ -20,7 +20,8 @@ public class LineCompleter {
       nextLine();
       insert(intentation); // IDE automatically actually adds extra intentation
       goToEndOfCurrentLine();
-    } else if (canInsertSemicolon(line)) {
+    }
+    else if (canInsertSemicolon(line)) {
       goToEndOfCurrentLine();
       insert(";" + EOL + getIntentation(line));
       nextLine();
@@ -38,7 +39,8 @@ public class LineCompleter {
       char charAt = line.charAt(i);
       if (Character.isWhitespace(charAt)) {
         prefix.append(charAt);
-      } else {
+      }
+      else {
         break;
       }
     }
