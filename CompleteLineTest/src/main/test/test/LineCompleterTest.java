@@ -7,7 +7,7 @@ import org.junit.Test;
 import henri5.LineCompleter;
 
 public class LineCompleterTest {
-  
+
   @Test
   public void testSemiColonMatch() {
     assertTrue(s("new foo()"));
@@ -26,10 +26,16 @@ public class LineCompleterTest {
     //assertTrue(s(" if (foo()) return bar()"));
     assertTrue(s("Foo.bar(bat())"));
     assertTrue(s("Foo.bar(baz, bat())"));
+    assertTrue(s("String at = \"@\""));
+    assertTrue(s("foo()"));
 
+    assertFalse(s(""));
+    assertFalse(s(" "));
     assertFalse(s("new foo();"));
     assertFalse(s("void foo()"));
     assertFalse(s("String s = \"endOfLine;\".toString();"));
+    assertFalse(s("@Test"));
+    assertFalse(s("@Ignore(\"becauseWhyNot\")"));
   }
 
   private boolean s(String string) {
@@ -40,7 +46,9 @@ public class LineCompleterTest {
   public void testCurlyBracketMatch() {
     assertTrue(c("public static void foo()"));
     assertTrue(c("Foo.bar foo()"));
+    assertTrue(c("@NotNull Foo foo()"));
     assertTrue(c("void foo()"));
+    assertTrue(c("Bar foo(Baz baz, Bat.Man batman)"));
     assertTrue(c(" if (true)"));
     assertTrue(c("if (true) "));
     assertTrue(c("\twhile (something) "));
@@ -55,6 +63,8 @@ public class LineCompleterTest {
     assertTrue(c("enum Foo"));
     assertTrue(c("\tfor (int i = 0; i < 100; i++)"));
 
+    assertFalse(c(""));
+    assertFalse(c("\t"));
     assertFalse(c("public static int = foo()"));
     assertFalse(c("new foo()"));
     assertFalse(c("throw new foo()"));
@@ -70,6 +80,7 @@ public class LineCompleterTest {
     assertFalse(c("public classic Foo"));
     assertFalse(c("Foo.bar(Baz.class)"));
     assertFalse(c("Foo.bar(bat())"));
+    assertFalse(c("foo()"));
   }
 
   private boolean c(String string) {

@@ -93,6 +93,22 @@ public class LineCompleter {
   }
 
   public static boolean canInsertSemicolon(String line) {
-    return !line.matches(".*;[^;)\"]*$") && !canInsertCurlyBrackets(line);
+    // actually curly brackets
+    if (canInsertCurlyBrackets(line)) {
+      return false;
+    }
+    // for annotations
+    if (line.matches("^[ \t]*\\@.*$")) {
+      return false;
+    }
+    // nothing meaningful
+    if (line.matches("^[ \t]*$")) {
+      return false;
+    }
+    // does not end with semicolon
+    if (!line.matches(".*;[^;)\"]*$")) {
+      return true;
+    }
+    return false;
   }
 }
