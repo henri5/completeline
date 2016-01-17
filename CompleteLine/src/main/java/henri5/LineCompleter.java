@@ -56,8 +56,8 @@ public class LineCompleter {
     styledText.setCaretOffset(getLineOffsetPosition(getCurrentCaretLine() + 1));
   }
 
-  private String getLineText(int lineAtOffset) {
-    return styledText.getLine(lineAtOffset);
+  private String getLineText(int lineNumber) {
+    return styledText.getLine(lineNumber);
   }
 
   private int getLineOffsetPosition(int lineNumber) {
