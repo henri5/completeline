@@ -77,8 +77,8 @@ public class LineCompleter {
     if (line.matches("^.*(?<![A-Za-z0-9])(else|finally|try)[ ]?$")) {
       return true;
     }
-    // for if/catch/while/for
-    if (line.matches("^.*(?<![A-Za-z0-9])(if|catch|while|for) \\(.*\\)[ ]?$")) {
+    // for if/catch/while/for..
+    if (line.matches("^.*(?<![A-Za-z0-9])(if|catch|while|for|synchronized) \\(.*\\)[ ]?$")) {
       return true;
     }
     // for method declaration
