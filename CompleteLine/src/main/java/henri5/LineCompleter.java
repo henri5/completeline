@@ -19,12 +19,10 @@ public class LineCompleter {
       insert(" {" + EOL + EOL + intentation + "}");
       goToNextLine();
       insert(intentation); // IDE automatically actually adds extra intentation
-      goToEndOfCurrentLine();
     }
     else if (canInsertSemicolon(line)) {
       trimEnding();
       insert(";");
-      goToEndOfCurrentLine();
     }
     else {
       //just insert new line
@@ -37,8 +35,8 @@ public class LineCompleter {
         insert(EOL);
         goToNextLine();
       }
-      goToEndOfCurrentLine();
     }
+    goToEndOfCurrentLine();
   }
 
   private void trimEnding() {
