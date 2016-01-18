@@ -23,10 +23,26 @@ public class LineCompleter {
     }
     else if (canInsertSemicolon(line)) {
       goToEndOfCurrentLine();
-      insert(";" + EOL + getIntentation(line));
-      goToNextLine();
+      insert(";");
       goToEndOfCurrentLine();
+      if (isNextLineEmpty()) {
+        insert(EOL + getIntentation(line));
+        goToNextLine();
+        goToEndOfCurrentLine();
+      }
     }
+  }
+
+  private boolean isNextLineEmpty() {
+    if (getCurrentCaretLine() == styledText.getLineCount()) { //indexOutOfBounds
+      return false;
+    }
+    
+    String line = getLineText(getCurrentCaretLine() + 1);    
+    if (getIntentation(line) != line) { // there must've been at least one non-whitespace char
+      return false;
+    }
+    return true;
   }
 
   private void insert(String string) {
