@@ -15,6 +15,7 @@ public class LineCompleterTest {
     assertTrue(s("Foo.bar(bat())"));
     assertTrue(s("Foo.bar(baz, bat())"));
     assertTrue(s("foo()"));
+    assertTrue(s("  foo(bar)"));
 
     assertFalse(s("new foo();"));
     assertFalse(s("void foo()"));
