@@ -25,7 +25,7 @@ public class LineCompleter {
       insert(";");
     }
     else {
-      //just insert new line
+      // just insert new line
       if (isNextLineEmpty()) {
         goToNextLine();
         trimEnding();
@@ -47,12 +47,13 @@ public class LineCompleter {
   }
 
   private boolean isNextLineEmpty() {
-    if (getCurrentCaretLine() == styledText.getLineCount()) { //indexOutOfBounds
+    if (getCurrentCaretLine() == styledText.getLineCount()) { // indexOutOfBounds
       return false;
     }
-    
-    String line = getLineText(getCurrentCaretLine() + 1);    
-    if (!line.trim().isEmpty()) { // there must've been at least one non-whitespace char
+
+    String line = getLineText(getCurrentCaretLine() + 1);
+    if (!line.trim().isEmpty()) {
+      // there must've been at least one non-whitespace char
       return false;
     }
     return true;
@@ -134,11 +135,11 @@ public class LineCompleter {
     if (line.matches("^[ \t]*$")) {
       return false;
     }
-    //single line comment
+    // single line comment
     if (line.matches("^[ \t]*//.*$")) {
       return false;
     }
-    //we added curly brackets ourselves
+    // we added curly brackets ourselves
     if (line.endsWith("{") && canInsertCurlyBrackets(line.substring(0, line.length() - 1))) {
       return false;
     }
