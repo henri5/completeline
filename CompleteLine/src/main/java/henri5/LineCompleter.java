@@ -31,6 +31,13 @@ public class LineCompleter {
         goToEndOfCurrentLine();
       }
     }
+    else {
+      //just insert new line
+      goToEndOfCurrentLine();
+      insert(EOL);
+      goToNextLine();
+      goToEndOfCurrentLine();
+    }
   }
 
   private void trimEnding() {
