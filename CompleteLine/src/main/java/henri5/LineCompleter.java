@@ -128,6 +128,10 @@ public class LineCompleter {
     if (line.matches("^[ \t]*$")) {
       return false;
     }
+    //single line comment
+    if (line.matches("^[ \t]*//.*$")) {
+      return false;
+    }
     // does not end with semicolon
     if (!line.matches(".*;[^;)\"]*$")) {
       return true;

@@ -49,6 +49,7 @@ public class LineCompleterTest {
     assertFalse(s(" "));
     assertFalse(s("@Test"));
     assertFalse(s("@Ignore(\"becauseWhyNot\")"));
+    assertFalse(s("   //foo"));
   }
 
   private boolean s(String string) {
@@ -111,6 +112,7 @@ public class LineCompleterTest {
   public void testCurlyBracketMatchMisc() {
     assertFalse(c(""));
     assertFalse(c("\t"));
+    assertFalse(c("//CAPS"));
   }
 
   private boolean c(String string) {
