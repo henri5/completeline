@@ -96,12 +96,13 @@ public class LineCompleterTest {
   public void testCurlyBracketIfWhileEtc() {
     assertTrue(c(" if (true)"));
     assertTrue(c("if (true) "));
+    assertTrue(c("if(true) "));
     assertTrue(c("\twhile (something) "));
     assertTrue(c(" else if (true)"));
     assertTrue(c("} else if (true)"));
     assertTrue(c("\tfor (int i = 0; i < 100; i++)"));
     assertTrue(c("synchronized (foo)"));
-    assertTrue(c("synchronized (foo())"));
+    assertTrue(c(" synchronized(foo())"));
 
     assertFalse(c(" if (true) {"));
   }
