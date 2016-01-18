@@ -140,6 +140,10 @@ public class LineCompleter {
     if (line.matches("^[ \t]*//.*$")) {
       return false;
     }
+    //we added curly brackets ourselves
+    if (line.endsWith("{") && canInsertCurlyBrackets(line.substring(0, line.length() - 1))) {
+      return false;
+    }
     // does not end with semicolon
     if (!line.matches(".*;[^;)\"]*$")) {
       return true;

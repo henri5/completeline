@@ -50,6 +50,9 @@ public class LineCompleterTest {
     assertFalse(s("@Test"));
     assertFalse(s("@Ignore(\"becauseWhyNot\")"));
     assertFalse(s("   //foo"));
+    assertFalse(s(" if (true) {"));
+    assertFalse(s("\tfor (int i = 0;;i++) {"));
+    assertFalse(s("while(isFoo()){"));
   }
 
   private boolean s(String string) {
