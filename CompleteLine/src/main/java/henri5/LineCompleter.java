@@ -25,17 +25,18 @@ public class LineCompleter {
       trimEnding();
       insert(";");
       goToEndOfCurrentLine();
-      if (isNextLineEmpty()) {
-        insert(EOL + getIntentation(line));
-        goToNextLine();
-        goToEndOfCurrentLine();
-      }
     }
     else {
       //just insert new line
-      goToEndOfCurrentLine();
-      insert(EOL);
-      goToNextLine();
+      if (isNextLineEmpty()) {
+        goToNextLine();
+        trimEnding();
+      }
+      else {
+        goToEndOfCurrentLine();
+        insert(EOL);
+        goToNextLine();
+      }
       goToEndOfCurrentLine();
     }
   }
@@ -53,7 +54,7 @@ public class LineCompleter {
     }
     
     String line = getLineText(getCurrentCaretLine() + 1);    
-    if (getIntentation(line) != line) { // there must've been at least one non-whitespace char
+    if (!line.trim().isEmpty()) { // there must've been at least one non-whitespace char
       return false;
     }
     return true;
