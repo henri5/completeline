@@ -15,14 +15,14 @@ public class LineCompleter {
     final String line = getLineText(getCurrentCaretLine());
     if (canInsertCurlyBrackets(line)) {
       String intentation = getIntentation(line);
-      goToEndOfCurrentLine();
-      insert((line.endsWith(" ") ? "" : " ") + "{" + EOL + EOL + intentation + "}");
+      trimEnding();
+      insert(" {" + EOL + EOL + intentation + "}");
       goToNextLine();
       insert(intentation); // IDE automatically actually adds extra intentation
       goToEndOfCurrentLine();
     }
     else if (canInsertSemicolon(line)) {
-      goToEndOfCurrentLine();
+      trimEnding();
       insert(";");
       goToEndOfCurrentLine();
       if (isNextLineEmpty()) {
@@ -31,6 +31,13 @@ public class LineCompleter {
         goToEndOfCurrentLine();
       }
     }
+  }
+
+  private void trimEnding() {
+    int currentLineIndex = getCurrentCaretLine();
+    String currentLine = getLineText(currentLineIndex);
+    String currentLineTrimmedEnd = getIntentation(currentLine) + currentLine.trim();
+    styledText.replaceTextRange(getLineOffsetPosition(currentLineIndex), currentLine.length(), currentLineTrimmedEnd);
   }
 
   private boolean isNextLineEmpty() {
