@@ -7,4 +7,7 @@ but beats nothing.
 
 Default shortcut is *Ctrl+Shift+Enter*, under keybindings search for _Try to complete line_
 
-To install, either build on your own or use [CompleteLine-update-site.zip](https://github.com/henri5/completeline/raw/master/CompleteLine-update-site.zip) as update site.
+To install, either 
+# build on your own 
+# use [completeline-updatesite](https://github.com/henri5/completeline-updatesite/raw/master/) as update site
+# download the repo [completeline-updatesite](https://github.com/henri5/completeline-updatesite), extract it and use the folder as update site
