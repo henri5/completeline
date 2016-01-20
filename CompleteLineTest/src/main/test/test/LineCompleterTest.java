@@ -99,7 +99,14 @@ public class LineCompleterTest {
     assertTrue(c("\tfor (int i = 0; i < 100; i++)"));
     assertTrue(c("synchronized (foo)"));
     assertTrue(c(" synchronized(foo())"));
+  }
+
+  @Test
+  public void testCurlyBracketParameterlessKeywords() {
     assertTrue(c(" do"));
+    assertTrue(c("else "));
+    assertTrue(c("finally"));
+    assertTrue(c("try"));
 
     assertFalse(c(" dont"));
   }
