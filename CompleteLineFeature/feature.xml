@@ -6,8 +6,12 @@
       provider-name="Henri Viik">
 
    <description>
-      Complete Line
+      Complete Current Statement for Eclipse
    </description>
+
+   <url>
+      <discovery label="Source code" url="https://github.com/henri5/completeline"/>
+   </url>
 
    <requires>
       <import plugin="org.eclipse.ui"/>
