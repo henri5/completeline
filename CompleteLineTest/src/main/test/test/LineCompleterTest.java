@@ -16,6 +16,7 @@ public class LineCompleterTest {
     assertTrue(s("Foo.bar(baz, bat())"));
     assertTrue(s("foo()"));
     assertTrue(s("  foo(bar)"));
+    assertTrue(s(")}"));
     
     assertFalse(s("void foo()"));
   }
@@ -104,6 +105,7 @@ public class LineCompleterTest {
     assertTrue(n("\t"));
     assertTrue(n("//CAPS"));
     assertTrue(n("   //foo"));
+    assertTrue(n("}"));
     assertTrue(n("@Test"));
     assertTrue(n("@Ignore(\"becauseWhyNot\")"));
     assertTrue(n(" if (true) {"));

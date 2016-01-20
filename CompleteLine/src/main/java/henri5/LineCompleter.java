@@ -132,7 +132,7 @@ public class LineCompleter {
       return false;
     }
     // nothing meaningful
-    if (line.matches("^[ \t]*$")) {
+    if (line.matches("^[ \t]*[}]?$")) {
       return false;
     }
     // single line comment
