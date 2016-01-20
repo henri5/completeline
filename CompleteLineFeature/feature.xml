@@ -2,7 +2,7 @@
 <feature
       id="CompleteLine"
       label="CompleteLine"
-      version="0.1.1.qualifier"
+      version="0.2.0.qualifier"
       provider-name="Henri Viik">
 
    <description>
