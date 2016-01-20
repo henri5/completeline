@@ -44,6 +44,12 @@ public class LineCompleterTest {
     assertTrue(s("case Foo.BAR: return"));
     assertTrue(s("default: return foo"));
     assertTrue(s("default: foo()"));
+    assertTrue(s("return foo()"));
+    assertTrue(s("return Foo.Bar.foo(\"foo\", bar, new Foo())"));
+    assertTrue(s("return \"foo\""));
+    assertTrue(s("return 1"));
+    assertTrue(s("return foo() || bar"));
+    assertTrue(s("return bar && foo()"));
     // assertTrue(s(" if (true) bar()")); wishful thinking
   }
 
@@ -140,6 +146,8 @@ public class LineCompleterTest {
     assertTrue(n("case Foo.BAR: return;"));
     assertTrue(n("default:"));
     assertTrue(n("default: return;"));
+    assertTrue(n("return Foo.Bar.foo(\"foo\", bar, new Foo());"));
+    assertTrue(n("return \"foo\";"));
   }
 
   private boolean s(String string) {

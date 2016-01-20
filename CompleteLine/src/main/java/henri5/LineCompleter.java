@@ -115,6 +115,10 @@ public class LineCompleter {
     if (line.matches("^.*(?<![A-Za-z0-9])(if|catch|while|for|synchronized|switch)[ ]?\\(.*\\)[ ]?$")) {
       return true;
     }
+    // for return statements
+    if (line.matches("^[ \t]*return .*[^;]$")) {
+      return false;
+    }
     // for method declaration
     if (line.matches("^[^=,]*?[ ]?(?<!(new|throw| |\t|:))[ ][A-Za-z0-9]+?\\(.*\\)[ ]?(throws [A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(,[ ]?[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*)*)?[ ]?$")) {
       return true;
