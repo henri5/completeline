@@ -11,3 +11,4 @@ To install, either
 - build on your own 
 - use https://github.com/henri5/completeline-updatesite/raw/master/ as update site
 - download the repo [completeline-updatesite](https://github.com/henri5/completeline-updatesite), extract it and use the folder as update site
+- get it from marketplace https://marketplace.eclipse.org/content/complete-current-statement-eclipse
