@@ -41,11 +41,10 @@ public class LineCompleterTest {
     assertTrue(s("if (true) return false"));
     assertTrue(s(" if (foo()) return bar"));
     assertTrue(s("for (int i = 0; i < 100; i++) j++"));
-    // assertTrue(s(" if (true) bar()"));
-  }
-
-  private boolean s(String string) {
-    return LineCompleter.canInsertSemicolon(string);
+    assertTrue(s("case Foo.BAR: return"));
+    assertTrue(s("default: return foo"));
+    assertTrue(s("default: foo()"));
+    // assertTrue(s(" if (true) bar()")); wishful thinking
   }
 
   @Test
@@ -99,6 +98,7 @@ public class LineCompleterTest {
     assertTrue(c("\tfor (int i = 0; i < 100; i++)"));
     assertTrue(c("synchronized (foo)"));
     assertTrue(c(" synchronized(foo())"));
+    assertTrue(c("switch(foo)"));
   }
 
   @Test
@@ -112,7 +112,17 @@ public class LineCompleterTest {
   }
 
   @Test
-  public void testNeitherMatch() {
+  public void testColonMisc() {
+    assertTrue(k("case 0"));
+    assertTrue(k("case Foo.BAR"));
+    assertTrue(k("case \"foo\""));
+    // assertTrue(k("case \"foo:bar\"")); // not going to that hell hole, no thanks
+    assertTrue(k("default"));
+    assertTrue(k("  default"));
+  }
+
+  @Test
+  public void testNoneMatch() {
     assertTrue(n(""));
     assertTrue(n(" "));
     assertTrue(n("\t"));
@@ -126,14 +136,27 @@ public class LineCompleterTest {
     assertTrue(n("while(isFoo()){"));
     assertTrue(n("new foo();"));
     assertTrue(n("String s = \"endOfLine;\".toString();"));
+    assertTrue(n("case Foo.BAR:"));
+    assertTrue(n("case Foo.BAR: return;"));
+    assertTrue(n("default:"));
+    assertTrue(n("default: return;"));
+  }
+
+  private boolean s(String string) {
+    return LineCompleter.canInsertSemicolon(string);
   }
 
   private boolean c(String string) {
     return LineCompleter.canInsertCurlyBrackets(string);
   }
 
+  // colon
+  private boolean k(String string) {
+    return LineCompleter.canInsertColon(string);
+  }
+
   // neither
   private boolean n(String string) {
-    return !c(string) && !s(string);
+    return !c(string) && !s(string) && !k(string);
   }
 }

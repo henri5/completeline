@@ -20,6 +20,10 @@ public class LineCompleter {
       goToNextLine();
       insert(intentation); // IDE automatically actually adds extra intentation
     }
+    else if (canInsertColon(line)) {
+      trimEnding();
+      insert(":");
+    }
     else if (canInsertSemicolon(line)) {
       trimEnding();
       insert(";");
@@ -108,11 +112,11 @@ public class LineCompleter {
       return true;
     }
     // for if/catch/while/for..
-    if (line.matches("^.*(?<![A-Za-z0-9])(if|catch|while|for|synchronized)[ ]?\\(.*\\)[ ]?$")) {
+    if (line.matches("^.*(?<![A-Za-z0-9])(if|catch|while|for|synchronized|switch)[ ]?\\(.*\\)[ ]?$")) {
       return true;
     }
     // for method declaration
-    if (line.matches("^[^=,]*?[ ]?(?<!(new|throw| |\t))[ ][A-Za-z0-9]+?\\(.*\\)[ ]?(throws [A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(,[ ]?[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*)*)?[ ]?$")) {
+    if (line.matches("^[^=,]*?[ ]?(?<!(new|throw| |\t|:))[ ][A-Za-z0-9]+?\\(.*\\)[ ]?(throws [A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(,[ ]?[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*)*)?[ ]?$")) {
       return true;
     }
     // for class/interface/enum declaration
@@ -122,9 +126,25 @@ public class LineCompleter {
     return false;
   }
 
-  public static boolean canInsertSemicolon(String line) {
+  public static boolean canInsertColon(String line) {
     // actually curly brackets
     if (canInsertCurlyBrackets(line)) {
+      return false;
+    }
+    // for case keyword
+    if (line.matches("^[ \t]*case[ ][^:]+$")) {
+      return true;
+    }
+    // for default keyword
+    if (line.matches("^[ \t]*default$")) {
+      return true;
+    }
+    return false;
+  }
+  
+  public static boolean canInsertSemicolon(String line) {
+    // also check other options
+    if (canInsertCurlyBrackets(line) ||canInsertColon(line)) {
       return false;
     }
     // for annotations
@@ -137,6 +157,14 @@ public class LineCompleter {
     }
     // single line comment
     if (line.matches("^[ \t]*//.*$")) {
+      return false;
+    }
+    // case keyword
+    if (line.matches("^[ \t]*case[ ][^:]+:$")) {
+      return false;
+    }
+    // default keyword
+    if (line.matches("^[ \t]*default:$")) {
       return false;
     }
     // we added curly brackets ourselves
