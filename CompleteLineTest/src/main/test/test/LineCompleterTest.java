@@ -54,6 +54,9 @@ public class LineCompleterTest {
     assertTrue(c("Foo.bar foo()"));
     assertTrue(c("@NotNull Foo foo()"));
     assertTrue(c("void foo()"));
+    assertTrue(c("void foo() throws Bar"));
+    assertTrue(c("void foo() throws Bar, Baz"));
+    assertTrue(c("void foo()throws Bar,Bat.Man "));
     assertTrue(c("Bar foo(Baz baz, Bat.Man batman)"));
 
     assertFalse(c("public static int = foo()"));
