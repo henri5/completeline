@@ -103,8 +103,8 @@ public class LineCompleter {
   }
 
   public static boolean canInsertCurlyBrackets(String line) {
-    // for try/else/finally
-    if (line.matches("^.*(?<![A-Za-z0-9])(else|finally|try)[ ]?$")) {
+    // for try/else/finally/..
+    if (line.matches("^.*(?<![A-Za-z0-9])(else|finally|try|do)[ ]?$")) {
       return true;
     }
     // for if/catch/while/for..

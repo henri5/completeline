@@ -17,7 +17,7 @@ public class LineCompleterTest {
     assertTrue(s("foo()"));
     assertTrue(s("  foo(bar)"));
     assertTrue(s(")}"));
-    
+
     assertFalse(s("void foo()"));
   }
 
@@ -96,8 +96,11 @@ public class LineCompleterTest {
     assertTrue(c("\tfor (int i = 0; i < 100; i++)"));
     assertTrue(c("synchronized (foo)"));
     assertTrue(c(" synchronized(foo())"));
+    assertTrue(c(" do"));
+
+    assertFalse(c(" dont"));
   }
-  
+
   @Test
   public void testNeitherMatch() {
     assertTrue(n(""));
@@ -118,7 +121,7 @@ public class LineCompleterTest {
   private boolean c(String string) {
     return LineCompleter.canInsertCurlyBrackets(string);
   }
-  
+
   // neither
   private boolean n(String string) {
     return !c(string) && !s(string);
