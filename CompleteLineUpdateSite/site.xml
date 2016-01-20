@@ -5,7 +5,7 @@
    </feature>
    <category-def name="CompleteLine" label="CompleteLine">
       <description>
-         Shamelessly tries to mock IJ&apos;s complete line behaviour.
+         Shamelessly tries to mock IJ&apos;s complete current statement behaviour.
       </description>
    </category-def>
 </site>
