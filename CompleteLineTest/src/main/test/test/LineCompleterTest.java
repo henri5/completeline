@@ -16,8 +16,7 @@ public class LineCompleterTest {
     assertTrue(s("Foo.bar(baz, bat())"));
     assertTrue(s("foo()"));
     assertTrue(s("  foo(bar)"));
-
-    assertFalse(s("new foo();"));
+    
     assertFalse(s("void foo()"));
   }
 
@@ -30,8 +29,6 @@ public class LineCompleterTest {
     assertTrue(s("String s = \"endOfLine;\""));
     assertTrue(s("String s = \"endOfLine;\".toString()"));
     assertTrue(s("String at = \"@\""));
-
-    assertFalse(s("String s = \"endOfLine;\".toString();"));
   }
 
   @Test
@@ -43,16 +40,7 @@ public class LineCompleterTest {
     assertTrue(s("if (true) return false"));
     assertTrue(s(" if (foo()) return bar"));
     assertTrue(s("for (int i = 0; i < 100; i++) j++"));
-//    assertTrue(s(" if (true) bar()"));
-
-    assertFalse(s(""));
-    assertFalse(s(" "));
-    assertFalse(s("@Test"));
-    assertFalse(s("@Ignore(\"becauseWhyNot\")"));
-    assertFalse(s("   //foo"));
-    assertFalse(s(" if (true) {"));
-    assertFalse(s("\tfor (int i = 0;;i++) {"));
-    assertFalse(s("while(isFoo()){"));
+    // assertTrue(s(" if (true) bar()"));
   }
 
   private boolean s(String string) {
@@ -107,18 +95,30 @@ public class LineCompleterTest {
     assertTrue(c("\tfor (int i = 0; i < 100; i++)"));
     assertTrue(c("synchronized (foo)"));
     assertTrue(c(" synchronized(foo())"));
-
-    assertFalse(c(" if (true) {"));
   }
-
+  
   @Test
-  public void testCurlyBracketMatchMisc() {
-    assertFalse(c(""));
-    assertFalse(c("\t"));
-    assertFalse(c("//CAPS"));
+  public void testNeitherMatch() {
+    assertTrue(n(""));
+    assertTrue(n(" "));
+    assertTrue(n("\t"));
+    assertTrue(n("//CAPS"));
+    assertTrue(n("   //foo"));
+    assertTrue(n("@Test"));
+    assertTrue(n("@Ignore(\"becauseWhyNot\")"));
+    assertTrue(n(" if (true) {"));
+    assertTrue(n("\tfor (int i = 0;;i++) {"));
+    assertTrue(n("while(isFoo()){"));
+    assertTrue(n("new foo();"));
+    assertTrue(n("String s = \"endOfLine;\".toString();"));
   }
 
   private boolean c(String string) {
     return LineCompleter.canInsertCurlyBrackets(string);
+  }
+  
+  // neither
+  private boolean n(String string) {
+    return !c(string) && !s(string);
   }
 }
