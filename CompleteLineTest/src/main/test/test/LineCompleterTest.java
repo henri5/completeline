@@ -32,6 +32,9 @@ public class LineCompleterTest {
     assertTrue(s("String s = \"endOfLine;\".toString()"));
     assertTrue(s("String at = \"@\""));
     assertTrue(s("Foo foo = (Foo) bar"));
+    assertTrue(s("@Foo Foo foo"));
+    assertTrue(s("@Foo.Bar Foo.Bar foo"));
+    assertTrue(s("@Foo Foo foo = foo()"));
   }
 
   @Test
@@ -60,7 +63,7 @@ public class LineCompleterTest {
   public void testCurlyBracketMethodDeclaration() {
     assertTrue(c("public static void foo()"));
     assertTrue(c("Foo.bar foo()"));
-    assertTrue(c("@NotNull Foo foo()"));
+    assertTrue(c("@Foo.Bar Foo foo()"));
     assertTrue(c("void foo()"));
     assertTrue(c("void _foo()"));
     assertTrue(c("void foo() throws Bar"));
@@ -68,6 +71,7 @@ public class LineCompleterTest {
     assertTrue(c("void foo() throws _Bar.Baz"));
     assertTrue(c("void foo()throws Bar,Bat.Man "));
     assertTrue(c("Bar foo(Baz baz, Bat.Man batman)"));
+    assertTrue(c("<T> Bar foo(T t)"));
 
     assertFalse(c("public static int = foo()"));
     assertFalse(c("new foo()"));

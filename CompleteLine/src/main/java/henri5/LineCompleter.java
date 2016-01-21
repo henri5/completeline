@@ -152,7 +152,7 @@ public class LineCompleter {
       return false;
     }
     // for annotations
-    if (line.matches("^[ \t]*\\@.*$")) {
+    if (line.matches("^[ \t]*\\@[A-Za-z0-9_]+(\\.[A-Za-z0-9_]+)*(\\(.*\\))?$")) {
       return false;
     }
     // nothing meaningful
