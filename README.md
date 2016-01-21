@@ -12,3 +12,7 @@ To install, either
 - use https://github.com/henri5/completeline-updatesite/raw/master/ as update site
 - download the repo [completeline-updatesite](https://github.com/henri5/completeline-updatesite), extract it and use the folder as update site
 - get it from marketplace https://marketplace.eclipse.org/content/complete-current-statement-eclipse
+ 
+License information:
+
+![](https://github.com/henri5/completeline/raw/master/license.png)
