@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import henri5.LineCompleter;
+import henri5.LineEvaluator;
 
 public class LineCompleterTest {
 
@@ -166,16 +166,16 @@ public class LineCompleterTest {
   }
 
   private boolean s(String string) {
-    return LineCompleter.canInsertSemicolon(string);
+    return LineEvaluator.canInsertSemicolon(string);
   }
 
   private boolean c(String string) {
-    return LineCompleter.canInsertCurlyBrackets(string);
+    return LineEvaluator.canInsertCurlyBrackets(string);
   }
 
   // colon
   private boolean k(String string) {
-    return LineCompleter.canInsertColon(string);
+    return LineEvaluator.canInsertColon(string);
   }
 
   // neither
