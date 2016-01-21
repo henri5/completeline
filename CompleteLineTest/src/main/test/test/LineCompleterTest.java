@@ -17,6 +17,7 @@ public class LineCompleterTest {
     assertTrue(s("foo()"));
     assertTrue(s("  foo(bar)"));
     assertTrue(s(")}"));
+    assertTrue(s("(Foo bar).foo()"));
 
     assertFalse(s("void foo()"));
   }
@@ -30,6 +31,7 @@ public class LineCompleterTest {
     assertTrue(s("String s = \"endOfLine;\""));
     assertTrue(s("String s = \"endOfLine;\".toString()"));
     assertTrue(s("String at = \"@\""));
+    assertTrue(s("Foo foo = (Foo) bar"));
   }
 
   @Test
