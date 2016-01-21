@@ -52,6 +52,7 @@ public class LineCompleterTest {
     assertTrue(s("return 1"));
     assertTrue(s("return foo() || bar"));
     assertTrue(s("return bar && foo()"));
+    assertTrue(s("do foo()"));
     // assertTrue(s(" if (true) bar()")); wishful thinking
   }
 

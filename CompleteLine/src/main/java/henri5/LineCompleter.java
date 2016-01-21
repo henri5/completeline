@@ -120,7 +120,7 @@ public class LineCompleter {
       return false;
     }
     // for method declaration
-    if (line.matches("^[^=,]*?[ ]?(?<!(new|throw| |\t|:))[ ][A-Za-z0-9_]+?\\(.*\\)[ ]?(throws [A-Za-z0-9_]+(\\.[A-Za-z0-9_]+)*(,[ ]?[A-Za-z0-9_]+(\\.[A-Za-z0-9_]+)*)*)?[ ]?$")) {
+    if (line.matches("^[^=,]*?[ ]?(?<!(new|throw| |\t|:|do))[ ][A-Za-z0-9_]+?\\(.*\\)[ ]?(throws [A-Za-z0-9_]+(\\.[A-Za-z0-9_]+)*(,[ ]?[A-Za-z0-9_]+(\\.[A-Za-z0-9_]+)*)*)?[ ]?$")) {
       return true;
     }
     // for class/interface/enum declaration
