@@ -108,11 +108,11 @@ public class LineCompleter {
 
   public static boolean canInsertCurlyBrackets(String line) {
     // for try/else/finally/..
-    if (line.matches("^.*(?<![A-Za-z0-9])(else|finally|try|do)[ ]?$")) {
+    if (line.matches("^.*(?<![A-Za-z0-9_])(else|finally|try|do)[ ]?$")) {
       return true;
     }
     // for if/catch/while/for..
-    if (line.matches("^.*(?<![A-Za-z0-9])(if|catch|while|for|synchronized|switch)[ ]?\\(.*\\)[ ]?$")) {
+    if (line.matches("^.*(?<![A-Za-z0-9_])(if|catch|while|for|synchronized|switch)[ ]?\\(.*\\)[ ]?$")) {
       return true;
     }
     // for return statements
@@ -120,11 +120,11 @@ public class LineCompleter {
       return false;
     }
     // for method declaration
-    if (line.matches("^[^=,]*?[ ]?(?<!(new|throw| |\t|:))[ ][A-Za-z0-9]+?\\(.*\\)[ ]?(throws [A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(,[ ]?[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*)*)?[ ]?$")) {
+    if (line.matches("^[^=,]*?[ ]?(?<!(new|throw| |\t|:))[ ][A-Za-z0-9_]+?\\(.*\\)[ ]?(throws [A-Za-z0-9_]+(\\.[A-Za-z0-9_]+)*(,[ ]?[A-Za-z0-9_]+(\\.[A-Za-z0-9_]+)*)*)?[ ]?$")) {
       return true;
     }
     // for class/interface/enum declaration
-    if (line.matches("^.*(?<![A-Za-z0-9])(class|interface|enum) .*[^{]$")) {
+    if (line.matches("^.*(?<![A-Za-z0-9_])(class|interface|enum) .*[^{]$")) {
       return true;
     }
     return false;

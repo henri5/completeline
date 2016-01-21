@@ -59,8 +59,10 @@ public class LineCompleterTest {
     assertTrue(c("Foo.bar foo()"));
     assertTrue(c("@NotNull Foo foo()"));
     assertTrue(c("void foo()"));
+    assertTrue(c("void _foo()"));
     assertTrue(c("void foo() throws Bar"));
     assertTrue(c("void foo() throws Bar, Baz"));
+    assertTrue(c("void foo() throws _Bar.Baz"));
     assertTrue(c("void foo()throws Bar,Bat.Man "));
     assertTrue(c("Bar foo(Baz baz, Bat.Man batman)"));
 
@@ -84,10 +86,12 @@ public class LineCompleterTest {
     assertTrue(c("interface Foo"));
     assertTrue(c("private interface Foo implements Bar"));
     assertTrue(c("enum Foo"));
+    assertTrue(c("enum _Foo"));
 
     assertFalse(c("fakeenum Foo"));
     assertFalse(c("enumfake Foo"));
     assertFalse(c("enum"));
+    assertFalse(c("_enum Foo"));
     assertFalse(c("enum Foo {"));
     assertFalse(c("public static class Foo {"));
     assertFalse(c("public classic Foo"));
@@ -105,6 +109,8 @@ public class LineCompleterTest {
     assertTrue(c("synchronized (foo)"));
     assertTrue(c(" synchronized(foo())"));
     assertTrue(c("switch(foo)"));
+    
+    assertFalse(c("_if (Foo foo)"));
   }
 
   @Test
@@ -115,12 +121,14 @@ public class LineCompleterTest {
     assertTrue(c("try"));
 
     assertFalse(c(" dont"));
+    assertFalse(c("_else "));
   }
 
   @Test
   public void testColonMisc() {
     assertTrue(k("case 0"));
     assertTrue(k("case Foo.BAR"));
+    assertTrue(k("case _Foo.BAR"));
     assertTrue(k("case \"foo\""));
     // assertTrue(k("case \"foo:bar\"")); // not going to that hell hole, no thanks
     assertTrue(k("default"));
