@@ -13,20 +13,30 @@ public class LineCompleter {
 
   protected void completeLine() {
     final String line = getLineText(getCurrentCaretLine());
-    if (LineEvaluator.canInsertCurlyBrackets(line)) {
+    if (LineEvaluator.canInsertBrackets(line)) {
+      String intentation = getIntentation(line);
+      trimEnding();
+      goToEndOfCurrentLine();
+      insert(" () {" + EOL + intentation + "}");
+      moveCaret(" (".length());      
+    }
+    else if (LineEvaluator.canInsertCurlyBrackets(line)) {
       String intentation = getIntentation(line);
       trimEnding();
       insert(" {" + EOL + EOL + intentation + "}");
       goToNextLine();
       insert(intentation); // IDE automatically actually adds extra intentation
+      goToEndOfCurrentLine();
     }
     else if (LineEvaluator.canInsertColon(line)) {
       trimEnding();
       insert(":");
+      goToEndOfCurrentLine();
     }
     else if (LineEvaluator.canInsertSemicolon(line)) {
       trimEnding();
       insert(";");
+      goToEndOfCurrentLine();
     }
     else {
       // just insert new line
@@ -39,8 +49,8 @@ public class LineCompleter {
         insert(EOL);
         goToNextLine();
       }
+      goToEndOfCurrentLine();
     }
-    goToEndOfCurrentLine();
   }
 
   private void trimEnding() {
@@ -81,6 +91,10 @@ public class LineCompleter {
     return prefix.toString();
   }
 
+  private void moveCaret(int delta) {
+    styledText.setCaretOffset(getCaretPosition() + delta);
+  }
+  
   private void goToEndOfCurrentLine() {
     String line = getLineText(getCurrentCaretLine());
     styledText.setCaretOffset(getLineOffsetPosition(getCurrentCaretLine()) + line.length());

@@ -141,6 +141,24 @@ public class LineCompleterTest {
     assertTrue(k("default"));
     assertTrue(k("  default"));
   }
+  
+  @Test
+  public void testBrackets() {
+    assertTrue(b("if"));
+    assertTrue(b(" if"));
+    assertTrue(b("else if"));
+    assertTrue(b("while"));
+    assertTrue(b("for"));
+    assertTrue(b("synchronized"));
+    assertTrue(b("catch"));
+    assertTrue(b("switch"));
+    
+
+    assertFalse(b("if ("));
+    assertFalse(b("if ()"));
+    assertFalse(b("gif ()"));
+    assertFalse(b("iff ()"));
+  }
 
   @Test
   public void testNoneMatch() {
@@ -151,6 +169,7 @@ public class LineCompleterTest {
     assertTrue(n("   //foo"));
     assertTrue(n("}"));
     assertTrue(n("@Test"));
+    assertTrue(n("@Foo.Bar"));
     assertTrue(n("@Ignore(\"becauseWhyNot\")"));
     assertTrue(n(" if (true) {"));
     assertTrue(n("\tfor (int i = 0;;i++) {"));
@@ -177,9 +196,13 @@ public class LineCompleterTest {
   private boolean k(String string) {
     return LineEvaluator.canInsertColon(string);
   }
+  
+  private boolean b(String string) {
+    return LineEvaluator.canInsertBrackets(string);
+  }
 
   // neither
   private boolean n(String string) {
-    return !c(string) && !s(string) && !k(string);
+    return !c(string) && !s(string) && !k(string) && !b(string);
   }
 }

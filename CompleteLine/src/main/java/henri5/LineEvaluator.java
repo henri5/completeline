@@ -3,6 +3,9 @@ package henri5;
 public class LineEvaluator {
 
   public static boolean canInsertCurlyBrackets(String line) {
+    if (canInsertBrackets(line)) {
+      return false;
+    }
     // for try/else/finally/..
     if (line.matches("^.*(?<![A-Za-z0-9_])(else|finally|try|do)[ ]?$")) {
       return true;
@@ -78,4 +81,11 @@ public class LineEvaluator {
     return false;
   }
 
+  public static boolean canInsertBrackets(String line) {
+    // for if/catch/while/for.. without brackets
+    if (line.matches("^[ \t]*(if|else if|catch|while|for|synchronized|switch)[ ]?$")) {
+      return true;
+    }
+    return false;
+  }
 }
