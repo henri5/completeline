@@ -32,7 +32,7 @@ public class LineCompleter {
     trimEnding();
     insert(" {" + EOL + EOL + intentation + "}");
     goToNextLine();
-    insert(intentation); // IDE automatically actually adds extra intentation
+    insert(intentation); // IDE automatically actually adds extra indentation
     goToEndOfCurrentLine();
   }
   
