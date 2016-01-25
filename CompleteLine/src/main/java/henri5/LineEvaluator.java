@@ -46,7 +46,7 @@ public class LineEvaluator {
       return true;
     }
     // for constructor with parameters declaration
-    if (line.matches("^[ \t]*(public|protected|private)?[ ]?[A-Za-z0-9_]+?\\([A-Za-z0-9_]+[A-Za-z0-9_]+(\\.[A-Za-z0-9_]+)* [A-Za-z0-9_]+(, [A-Za-z0-9_]+(\\.[A-Za-z0-9_]+)* [A-Za-z0-9_]+)*\\)[ ]?(throws [A-Za-z0-9_]+(\\.[A-Za-z0-9_]+)*(,[ ]?[A-Za-z0-9_]+(\\.[A-Za-z0-9_]+)*)*)?[ ]?$")) {
+    if (line.matches("^[ \t]*(public|protected|private)?[ ]?[A-Za-z0-9_]+?\\([A-Za-z0-9_]+(\\.[A-Za-z0-9_]+)* [A-Za-z0-9_]+(, [A-Za-z0-9_]+(\\.[A-Za-z0-9_]+)* [A-Za-z0-9_]+)*\\)[ ]?(throws [A-Za-z0-9_]+(\\.[A-Za-z0-9_]+)*(,[ ]?[A-Za-z0-9_]+(\\.[A-Za-z0-9_]+)*)*)?[ ]?$")) {
       return true;
     }
     // for class/interface/enum declaration
