@@ -22,7 +22,7 @@ public class CompleteLineCommand implements IHandler {
   public Object execute(ExecutionEvent event) throws ExecutionException {
     Control control = getEditorControl();
     if (control instanceof StyledText) {
-      new LineCompleter((StyledText) control).completeLine();
+      LineCompleter.completeLine((StyledText) control);
     }
     return null;
   }

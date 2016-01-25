@@ -6,51 +6,60 @@ public class LineCompleter {
   private final StyledText styledText;
   private final String EOL;
 
-  public LineCompleter(StyledText styledText) {
+  private LineCompleter(StyledText styledText) {
     this.styledText = styledText;
     EOL = styledText.getLineDelimiter();
   }
 
-  protected void completeLine() {
+  protected static void completeLine(StyledText styledText) {
+    final String line = styledText.getLine(styledText.getLineAtOffset(styledText.getCaretOffset()));
+    Action action = LineEvaluator.getAction(line);
+    action.run(styledText);
+  }
+  
+  private void addBracket() {
     final String line = getLineText(getCurrentCaretLine());
-    if (LineEvaluator.canInsertBrackets(line)) {
-      String intentation = getIntentation(line);
-      trimEnding();
-      goToEndOfCurrentLine();
-      insert(" () {" + EOL + intentation + "}");
-      moveCaret(" (".length());      
-    }
-    else if (LineEvaluator.canInsertCurlyBrackets(line)) {
-      String intentation = getIntentation(line);
-      trimEnding();
-      insert(" {" + EOL + EOL + intentation + "}");
+    String intentation = getIntentation(line);
+    trimEnding();
+    goToEndOfCurrentLine();
+    insert(" () {" + EOL + intentation + "}");
+    moveCaret(" (".length()); 
+  }
+  
+  private void addCurlyBracket() {
+    final String line = getLineText(getCurrentCaretLine());
+    String intentation = getIntentation(line);
+    trimEnding();
+    insert(" {" + EOL + EOL + intentation + "}");
+    goToNextLine();
+    insert(intentation); // IDE automatically actually adds extra intentation
+    goToEndOfCurrentLine();
+  }
+  
+  private void addColon() {
+    trimEnding();
+    insert(":");
+    goToEndOfCurrentLine();
+  }
+  
+  private void addSemiColon() {
+    trimEnding();
+    insert(";");
+    goToEndOfCurrentLine();
+  }
+
+  private void addNewLine() {
+    // just insert new line
+    if (isNextLineEmpty()) {
       goToNextLine();
-      insert(intentation); // IDE automatically actually adds extra intentation
-      goToEndOfCurrentLine();
-    }
-    else if (LineEvaluator.canInsertColon(line)) {
       trimEnding();
-      insert(":");
-      goToEndOfCurrentLine();
-    }
-    else if (LineEvaluator.canInsertSemicolon(line)) {
-      trimEnding();
-      insert(";");
-      goToEndOfCurrentLine();
     }
     else {
-      // just insert new line
-      if (isNextLineEmpty()) {
-        goToNextLine();
-        trimEnding();
-      }
-      else {
-        goToEndOfCurrentLine();
-        insert(EOL);
-        goToNextLine();
-      }
       goToEndOfCurrentLine();
+      insert(EOL);
+      goToNextLine();
     }
+    goToEndOfCurrentLine();
   }
 
   private void trimEnding() {
@@ -118,5 +127,62 @@ public class LineCompleter {
 
   private int getCaretPosition() {
     return styledText.getCaretOffset();
+  }
+
+  public enum Action {
+    BRACKETS(new LineCompleterAction() {
+
+      @Override
+      public void run(LineCompleter completer) {
+        completer.addBracket();
+      }
+
+    }),
+    CURLY_BRACKETS(new LineCompleterAction() {
+
+      @Override
+      public void run(LineCompleter completer) {
+        completer.addCurlyBracket();
+      }
+
+    }),
+    COLON(new LineCompleterAction() {
+
+      @Override
+      public void run(LineCompleter completer) {
+        completer.addColon();
+      }
+
+    }),
+    SEMICOLON(new LineCompleterAction() {
+
+      @Override
+      public void run(LineCompleter completer) {
+        completer.addSemiColon();
+      }
+
+    }),
+    NEW_LINE(new LineCompleterAction() {
+
+      @Override
+      public void run(LineCompleter completer) {
+        completer.addNewLine();
+      }
+
+    });
+
+    private final LineCompleterAction action;
+
+    Action(LineCompleterAction action) {
+      this.action = action;
+    }
+
+    private void run(StyledText text) {
+      action.run(new LineCompleter(text));
+    }
+  }
+
+  private interface LineCompleterAction {
+    void run(LineCompleter completer);
   }
 }

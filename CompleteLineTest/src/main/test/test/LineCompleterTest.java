@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import henri5.LineEvaluator;
+import henri5.LineCompleter.Action;
 
 public class LineCompleterTest {
 
@@ -185,24 +186,23 @@ public class LineCompleterTest {
   }
 
   private boolean s(String string) {
-    return LineEvaluator.canInsertSemicolon(string);
+    return Action.SEMICOLON.equals(LineEvaluator.getAction(string));
   }
 
   private boolean c(String string) {
-    return LineEvaluator.canInsertCurlyBrackets(string);
+    return Action.CURLY_BRACKETS.equals(LineEvaluator.getAction(string));
   }
 
-  // colon
   private boolean k(String string) {
-    return LineEvaluator.canInsertColon(string);
+    return Action.COLON.equals(LineEvaluator.getAction(string));
   }
   
   private boolean b(String string) {
-    return LineEvaluator.canInsertBrackets(string);
+    return Action.BRACKETS.equals(LineEvaluator.getAction(string));
   }
 
   // neither
   private boolean n(String string) {
-    return !c(string) && !s(string) && !k(string) && !b(string);
+    return Action.NEW_LINE.equals(LineEvaluator.getAction(string));
   }
 }
