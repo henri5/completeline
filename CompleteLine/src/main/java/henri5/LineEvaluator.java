@@ -2,6 +2,14 @@ package henri5;
 
 public class LineEvaluator {
 
+  public static boolean canInsertBrackets(String line) {
+    // for if/catch/while/for.. without brackets
+    if (line.matches("^[ \t]*(if|else if|catch|while|for|synchronized|switch)[ ]?$")) {
+      return true;
+    }
+    return false;
+  }
+
   public static boolean canInsertCurlyBrackets(String line) {
     if (canInsertBrackets(line)) {
       return false;
@@ -31,7 +39,7 @@ public class LineEvaluator {
 
   public static boolean canInsertColon(String line) {
     // actually curly brackets
-    if (canInsertCurlyBrackets(line)) {
+    if (canInsertBrackets(line) || canInsertCurlyBrackets(line)) {
       return false;
     }
     // for case keyword
@@ -47,7 +55,7 @@ public class LineEvaluator {
 
   public static boolean canInsertSemicolon(String line) {
     // also check other options
-    if (canInsertCurlyBrackets(line) ||canInsertColon(line)) {
+    if (canInsertBrackets(line) || canInsertCurlyBrackets(line) || canInsertColon(line)) {
       return false;
     }
     // for annotations
@@ -76,14 +84,6 @@ public class LineEvaluator {
     }
     // does not end with semicolon
     if (!line.matches(".*;[^;)\"]*$")) {
-      return true;
-    }
-    return false;
-  }
-
-  public static boolean canInsertBrackets(String line) {
-    // for if/catch/while/for.. without brackets
-    if (line.matches("^[ \t]*(if|else if|catch|while|for|synchronized|switch)[ ]?$")) {
       return true;
     }
     return false;
