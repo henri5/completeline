@@ -64,6 +64,14 @@ public class LineCompleterTest {
   public void testCurlyBracketMethodDeclaration() {
     assertTrue(c("public static void foo()"));
     assertTrue(c("Foo.bar foo()"));
+    // impossible to know if method call or constructor declaration with regex. Could guess
+    // by checking if first letter is capital letter as normal people have, but might be a
+    // stretch
+//    assertTrue(c("Foo()")); 
+    assertTrue(c("public Foo()"));
+    assertTrue(c("Foo(Bar bar)"));
+    assertTrue(c("Foo(Bar bar, Baz baz)"));
+    assertTrue(c("public Foo(Bar bar, Baz baz)"));
     assertTrue(c("@Foo.Bar Foo foo()"));
     assertTrue(c("void foo()"));
     assertTrue(c("void _foo()"));
