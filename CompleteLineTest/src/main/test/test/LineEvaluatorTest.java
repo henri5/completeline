@@ -36,6 +36,7 @@ public class LineEvaluatorTest {
     assertTrue(sc("@Foo Foo foo"));
     assertTrue(sc("@Foo.Bar Foo.Bar foo"));
     assertTrue(sc("@Foo Foo foo = foo()"));
+    assertTrue(sc("Möclass foo"));
   }
 
   @Test
@@ -75,6 +76,7 @@ public class LineEvaluatorTest {
     assertTrue(cb("@Foo.Bar Foo foo()"));
     assertTrue(cb("void foo()"));
     assertTrue(cb("void _foo()"));
+    // assertTrue(cb("void möebius()")); // not now
     assertTrue(cb("void foo() throws Bar"));
     assertTrue(cb("void foo() throws Bar, Baz"));
     assertTrue(cb("void foo() throws _Bar.Baz"));

@@ -3,7 +3,7 @@ package henri5;
 import henri5.LineCompleter.Action;
 
 public class LineEvaluator {
-  private static final String STUFF_NAME = "[A-Za-z0-9_]+";
+  private static final String STUFF_NAME = "[A-Za-z0-9_]+"; // TODO go crazy and generate regex for allowed identifier?
   private static final String CLASS_NAME = STUFF_NAME;
   private static final String CLASS_NAME_INNER = String.format("%1$s(\\.%1$s)*", CLASS_NAME);
   private static final String METHOD_NAME = STUFF_NAME;
@@ -12,7 +12,7 @@ public class LineEvaluator {
   private static final String METHOD_PARAMS = String.format("%1$s(,[ ]?%1$s)*", METHOD_PARAM);
   private static final String THROWS = String.format("throws %1$s(,[ ]?%1$s)*", CLASS_NAME_INNER);
   private static final String INDENTATION = "[ \t]*";
-  
+  private static final String ANYTHING_WITH_SPACE_OR_INTENTATION = String.format("(.* |%1$s)", INDENTATION);
   
   public static Action getAction(String line) {
     if (canInsertBrackets(line)) {
@@ -40,11 +40,11 @@ public class LineEvaluator {
 
   private static boolean canInsertCurlyBrackets(String line) {
     // for try/else/finally/..
-    if (line.matches("^.*(?<![A-Za-z0-9_])(else|finally|try|do)[ ]?$")) {
+    if (matches(line, "^%1$s(else|finally|try|do)[ ]?$", ANYTHING_WITH_SPACE_OR_INTENTATION)) {
       return true;
     }
     // for if/catch/while/for..
-    if (line.matches("^.*(?<![A-Za-z0-9_])(if|catch|while|for|synchronized|switch)[ ]?\\(.*\\)[ ]?$")) {
+    if (matches(line, "^%1$s(if|catch|while|for|synchronized|switch)[ ]?\\(.*\\)[ ]?$", ANYTHING_WITH_SPACE_OR_INTENTATION)) {
       return true;
     }
     // for return statements
@@ -60,7 +60,7 @@ public class LineEvaluator {
       return true;
     }
     // for class/interface/enum declaration
-    if (line.matches("^.*(?<![A-Za-z0-9_])(class|interface|enum) .*[^{]$")) {
+    if (matches(line, "^%1$s(class|interface|enum) .*[^{]$", ANYTHING_WITH_SPACE_OR_INTENTATION)) {
       return true;
     }
     return false;
