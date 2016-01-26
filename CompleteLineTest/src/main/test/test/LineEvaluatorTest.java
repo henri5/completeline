@@ -7,7 +7,7 @@ import org.junit.Test;
 import henri5.LineEvaluator;
 import henri5.LineCompleter.Action;
 
-public class LineCompleterTest {
+public class LineEvaluatorTest {
 
   @Test
   public void testSemiColonFunctionCalls() {
