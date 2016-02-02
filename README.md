@@ -1,5 +1,7 @@
 # Eclipse Complete Current Statement
 
+<a href="http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=2686779" class="drag" title="Drag onto your running Eclipse toolbar to install Complete Current Statement for Eclipse"><img class="img-responsive" src="https://marketplace.eclipse.org/sites/all/themes/solstice/_themes/solstice_marketplace/public/images/btn-install.png" alt="Drag onto your running Eclipse toolbar to install Complete Current Statement for Eclipse" /></a>
+
 One of the main features Eclipse is missing is complete current statement shortcut, which adds 
 either semicolon or curly brackets (braces?) at the end of the line, similar to the one in IntelliJ. This 
 plugin tries to shamelessly mock it. As it's just regex comparison, it's nowhere near the level 
