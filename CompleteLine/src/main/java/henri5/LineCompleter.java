@@ -30,6 +30,7 @@ public class LineCompleter {
     final String line = getLineText(getCurrentCaretLine());
     String intentation = getIntentation(line);
     trimEnding();
+    goToEndOfCurrentLine();
     insert(" {" + EOL + EOL + intentation + "}");
     goToNextLine();
     insert(intentation); // IDE automatically actually adds extra indentation

@@ -18,6 +18,12 @@
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+M2+ENTER">
       </key>
+      <key
+            commandId="Henri5.CompleteLine"
+            contextId="org.eclipse.wst.jsdt.ui.javascriptViewScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M2+ENTER">
+      </key>
    </extension>
 
 </plugin>
