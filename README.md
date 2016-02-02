@@ -16,3 +16,7 @@ Default shortcut is *Ctrl+Shift+Enter*, under keybindings search for _Try to com
 ### License information:
 
 ![](https://github.com/henri5/completeline/raw/master/license.png)
+
+<a href="http://with-eclipse.github.io/" target="_blank">
+<img alt="with-Eclipse logo" src="http://with-eclipse.github.io/with-eclipse-0.jpg" />
+</a>
