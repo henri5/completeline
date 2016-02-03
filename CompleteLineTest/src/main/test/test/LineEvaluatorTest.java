@@ -118,6 +118,7 @@ public class LineEvaluatorTest {
   @Test
   public void testCurlyBracketIfWhileEtc() {
     assertTrue(cb(" if (true)"));
+    assertTrue(cb("} else if (true)"));
     assertTrue(cb("if (true) "));
     assertTrue(cb("if(true) "));
     assertTrue(cb("\twhile (something) "));
@@ -158,12 +159,12 @@ public class LineEvaluatorTest {
     assertTrue(br("if"));
     assertTrue(br(" if"));
     assertTrue(br("else if"));
+    assertTrue(br("} else if"));
     assertTrue(br("while"));
     assertTrue(br("for"));
     assertTrue(br("synchronized"));
     assertTrue(br("catch"));
     assertTrue(br("switch"));
-    
 
     assertFalse(br("if ("));
     assertFalse(br("if ()"));

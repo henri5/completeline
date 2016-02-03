@@ -35,6 +35,9 @@ public class LineEvaluator {
     if (matches(line, "^%1$s(if|else if|catch|while|for|synchronized|switch)[ ]?$", INDENTATION)) {
       return true;
     }
+    if (matches(line, "^%1$s}[ ]?else if[ ]?$", INDENTATION)) {
+      return true;
+    }
     return false;
   }
 
