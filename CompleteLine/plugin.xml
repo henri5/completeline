@@ -7,7 +7,7 @@
             categoryId="org.eclipse.ui.category.textEditor"
             defaultHandler="henri5.CompleteLineCommand"
             id="Henri5.CompleteLine"
-            name="Try to complete line">
+            name="Complete line">
       </command>
    </extension>
    <extension
