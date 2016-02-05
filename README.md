@@ -16,7 +16,7 @@ Default shortcut is *Ctrl+Shift+Enter* in Java and JavaScript Editors, to reassi
 - get it from marketplace https://marketplace.eclipse.org/content/complete-current-statement-eclipse
  
 #### Features
-* Open curly braces after class, method, enum, etc declaration
+* Open curly braces after class, method, interface, etc declaration
 * Open curly braces after if (..), try, etc
 * Open brackets after if, while, for, etc
 * Add colon after case
