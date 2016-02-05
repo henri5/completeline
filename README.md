@@ -7,7 +7,7 @@ either semicolon or curly brackets (braces?) at the end of the line, similar to 
 plugin tries to shamelessly mock it. As it's just regex comparison, it's nowhere near the level 
 IJ is, but beats nothing.
 
-Default shortcut is *Ctrl+Shift+Enter*, under keybindings search for _Try to complete line_
+Default shortcut is *Ctrl+Shift+Enter* in Java and JavaScript Editors, to reassign under keybindings (e.g. opened via double *Ctrl+Shift+L* ) search for _Try to complete line_
 
 ### To install, either 
 - build on your own 
