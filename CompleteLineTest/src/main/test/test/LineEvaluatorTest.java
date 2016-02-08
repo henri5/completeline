@@ -58,6 +58,10 @@ public class LineEvaluatorTest {
     assertTrue(sc("return foo() || bar"));
     assertTrue(sc("return bar && foo()"));
     assertTrue(sc("do foo()"));
+    assertTrue(sc("protected abstract void foo()"));
+    assertTrue(sc("abstract void foo()"));
+    assertTrue(sc("\t\tabstract void foo()"));
+    assertTrue(sc("public abstract Foo.Bar foo() throws Baz"));
     // assertTrue(s(" if (true) bar()")); wishful thinking
   }
 
@@ -83,6 +87,8 @@ public class LineEvaluatorTest {
     assertTrue(cb("void foo()throws Bar,Bat.Man "));
     assertTrue(cb("Bar foo(Baz baz, Bat.Man batman)"));
     assertTrue(cb("<T> Bar foo(T t)"));
+    assertTrue(cb("void abstractMethod()"));
+    assertTrue(cb("public myabstract foo()"));
 
     assertFalse(cb("public static int = foo()"));
     assertFalse(cb("new foo()"));

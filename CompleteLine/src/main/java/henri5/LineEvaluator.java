@@ -54,8 +54,8 @@ public class LineEvaluator {
     if (matches(line, "^%1$sreturn .*[^;]$", INDENTATION)) {
       return false;
     }
-    // for method declaration
-    if (matches(line, "^[^=,]*?[ ]?(?<!(new|throw| |\t|:|do))[ ]%1$s\\(.*\\)[ ]?(%2$s)?[ ]?$", METHOD_NAME, THROWS)) {
+    // for non-abstract method declaration
+    if (!matches(line, "^(.*? |%1$s)?abstract .*$", INDENTATION) && matches(line, "^[^=,]*?[ ]?(?<!(new|throw| |\t|:|do))[ ]%1$s\\(.*\\)[ ]?(%2$s)?[ ]?$", METHOD_NAME, THROWS)) {
       return true;
     }
     // for constructor with parameters declaration

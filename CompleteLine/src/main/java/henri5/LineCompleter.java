@@ -39,12 +39,14 @@ public class LineCompleter {
   
   private void addColon() {
     trimEnding();
+    goToEndOfCurrentLine();
     insert(":");
     goToEndOfCurrentLine();
   }
   
   private void addSemiColon() {
     trimEnding();
+    goToEndOfCurrentLine();
     insert(";");
     goToEndOfCurrentLine();
   }
