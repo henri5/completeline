@@ -21,7 +21,7 @@ Default shortcut is *Ctrl+Shift+Enter* in Java and JavaScript Editors, to reassi
 * Open brackets after if, while, for, etc
 * Add colon after case
 * Add semicolon in the end of the line, if seems necessary
-* Otherwise just insert and jump to next line
+* Otherwise just insert new line and jump to it
 
 ### License information:
 
