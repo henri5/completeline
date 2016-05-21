@@ -13,12 +13,15 @@ import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
 
 public class CompleteLineCommand implements IHandler {
 
+  @Override
   public void addHandlerListener(IHandlerListener handlerListener) {
   }
 
+  @Override
   public void dispose() {
   }
 
+  @Override
   public Object execute(ExecutionEvent event) throws ExecutionException {
     Control control = getEditorControl();
     if (control instanceof StyledText) {
@@ -27,6 +30,7 @@ public class CompleteLineCommand implements IHandler {
     return null;
   }
 
+  @Override
   public boolean isEnabled() {
     return getEditorControl() != null;
   }
@@ -44,10 +48,12 @@ public class CompleteLineCommand implements IHandler {
     return null;
   }
 
+  @Override
   public boolean isHandled() {
     return isEnabled();
   }
 
+  @Override
   public void removeHandlerListener(IHandlerListener handlerListener) {
   }
 }
