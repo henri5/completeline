@@ -25,9 +25,13 @@ public class CompleteLineCommand implements IHandler {
   public Object execute(ExecutionEvent event) throws ExecutionException {
     Control control = getEditorControl();
     if (control instanceof StyledText) {
-      LineCompleter.completeLine((StyledText) control);
+      doLineCompletion((StyledText) control);
     }
     return null;
+  }
+  
+  void doLineCompletion(StyledText text) {
+    LineCompleter.completeLine(text);
   }
 
   @Override

@@ -12,9 +12,17 @@ public class LineCompleter {
   }
 
   protected static void completeLine(StyledText styledText) {
+    completeLine(styledText, false);
+  }
+
+  protected static void completeLine(StyledText styledText, boolean forceNewLine) {
     final String line = styledText.getLine(styledText.getLineAtOffset(styledText.getCaretOffset()));
     Action action = LineEvaluator.getAction(line);
     action.run(styledText);
+    
+    if (forceNewLine && action.equals(Action.SEMICOLON)) {
+      new LineCompleter(styledText).addNewLine();
+    }
   }
   
   private void addBracket() {

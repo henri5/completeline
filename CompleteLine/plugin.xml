@@ -9,6 +9,12 @@
             id="Henri5.CompleteLine"
             name="Complete line">
       </command>
+      <command
+            categoryId="org.eclipse.ui.category.textEditor"
+            defaultHandler="henri5.CompleteLineCommandAddLine"
+            id="Henri5.CompleteLineAddLine"
+            name="Complete line (always adds new line)">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.bindings">
@@ -17,6 +23,12 @@
             contextId="org.eclipse.jdt.ui.javaEditorScope"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+M2+ENTER">
+      </key>
+      <key
+            commandId="Henri5.CompleteLineAddLine"
+            contextId="org.eclipse.jdt.ui.javaEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M2+N">
       </key>
       <key
             commandId="Henri5.CompleteLine"
