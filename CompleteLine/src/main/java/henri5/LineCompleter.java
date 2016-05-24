@@ -21,7 +21,7 @@ public class LineCompleter {
     action.run(styledText);
     
     if (forceNewLine && action.equals(Action.SEMICOLON)) {
-      new LineCompleter(styledText).addNewLine();
+      Action.NEW_LINE.run(styledText);
     }
   }
   
