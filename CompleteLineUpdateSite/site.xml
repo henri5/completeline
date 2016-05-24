@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/CompleteLine_0.2.4.qualifier.jar" id="CompleteLine" version="0.2.4.qualifier">
+   <feature url="features/CompleteLine_0.2.5.qualifier.jar" id="CompleteLine" version="0.2.5.qualifier">
       <category name="CompleteLine"/>
    </feature>
    <category-def name="CompleteLine" label="CompleteLine">
