@@ -1,6 +1,7 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 
@@ -11,84 +12,82 @@ public class LineEvaluatorTest {
 
   @Test
   public void testSemiColonFunctionCalls() {
-    assertTrue(sc("new foo()"));
-    assertTrue(sc("new foo(bar, baz)"));
-    assertTrue(sc("Foo.bar(bat())"));
-    assertTrue(sc("Foo.bar(baz, bat())"));
-    assertTrue(sc("foo()"));
-    assertTrue(sc("  foo(bar)"));
-    assertTrue(sc(")}"));
-    assertTrue(sc("(Foo bar).foo()"));
-
-    assertFalse(sc("void foo()"));
+    assertSemiColon("new foo()");
+    assertSemiColon("new foo(bar, baz)");
+    assertSemiColon("Foo.bar(bat())");
+    assertSemiColon("Foo.bar(baz, bat())");
+    assertSemiColon("foo()");
+    assertSemiColon("  foo(bar)");
+    assertSemiColon(")}");
+    assertSemiColon("(Foo bar).foo()");
   }
 
   @Test
   public void testSemiColonFieldDeclaration() {
-    assertTrue(sc("int i"));
-    assertTrue(sc("i++"));
-    assertTrue(sc("int i = asd"));
-    assertTrue(sc("String s = \"endOfLine\""));
-    assertTrue(sc("String s = \"endOfLine;\""));
-    assertTrue(sc("String s = \"endOfLine;\".toString()"));
-    assertTrue(sc("String at = \"@\""));
-    assertTrue(sc("Foo foo = (Foo) bar"));
-    assertTrue(sc("@Foo Foo foo"));
-    assertTrue(sc("@Foo.Bar Foo.Bar foo"));
-    assertTrue(sc("@Foo Foo foo = foo()"));
-    assertTrue(sc("Möclass foo"));
+    assertSemiColon("int i");
+    assertSemiColon("i++");
+    assertSemiColon("int i = asd");
+    assertSemiColon("String s = \"endOfLine\"");
+    assertSemiColon("String s = \"endOfLine;\"");
+    assertSemiColon("String s = \"endOfLine;\".toString()");
+    assertSemiColon("String at = \"@\"");
+    assertSemiColon("Foo foo = (Foo) bar");
+    assertSemiColon("@Foo Foo foo");
+    assertSemiColon("@Foo.Bar Foo.Bar foo");
+    assertSemiColon("@Foo Foo foo = foo()");
+    assertSemiColon("Möclass foo");
   }
 
   @Test
   public void testSemiColonMatchMisc() {
-    assertTrue(sc("throw foo()"));
-    assertTrue(sc("throw foo"));
-    assertTrue(sc("import foo.bar"));
-    assertTrue(sc("import static foo.bar.Baz"));
-    assertTrue(sc("if (true) return false"));
-    assertTrue(sc(" if (foo()) return bar"));
-    assertTrue(sc("for (int i = 0; i < 100; i++) j++"));
-    assertTrue(sc("case Foo.BAR: return"));
-    assertTrue(sc("default: return foo"));
-    assertTrue(sc("default: foo()"));
-    assertTrue(sc("return foo()"));
-    assertTrue(sc("return Foo.Bar.foo(\"foo\", bar, new Foo())"));
-    assertTrue(sc("return \"foo\""));
-    assertTrue(sc("return 1"));
-    assertTrue(sc("return foo() || bar"));
-    assertTrue(sc("return bar && foo()"));
-    assertTrue(sc("do foo()"));
-    assertTrue(sc("protected abstract void foo()"));
-    assertTrue(sc("abstract void foo()"));
-    assertTrue(sc("\t\tabstract void foo()"));
-    assertTrue(sc("public abstract Foo.Bar foo() throws Baz"));
+    assertSemiColon("throw foo()");
+    assertSemiColon("throw foo");
+    assertSemiColon("import foo.bar");
+    assertSemiColon("import static foo.bar.Baz");
+    assertSemiColon("if (true) return false");
+    assertSemiColon(" if (foo()) return bar");
+    assertSemiColon("for (int i = 0; i < 100; i++) j++");
+    assertSemiColon("case Foo.BAR: return");
+    assertSemiColon("default: return foo");
+    assertSemiColon("default: foo()");
+    assertSemiColon("return foo()");
+    assertSemiColon("return Foo.Bar.foo(\"foo\", bar, new Foo())");
+    assertSemiColon("return \"foo\"");
+    assertSemiColon("return 1");
+    assertSemiColon("return foo() || bar");
+    assertSemiColon("return bar && foo()");
+    assertSemiColon("do foo()");
+    assertSemiColon("protected abstract void foo()");
+    assertSemiColon("abstract void foo()");
+    assertSemiColon("\t\tabstract void foo()");
+    assertSemiColon("public abstract Foo.Bar foo() throws Baz");
     // assertTrue(s(" if (true) bar()")); wishful thinking
   }
 
   @Test
   public void testCurlyBracketMethodDeclaration() {
-    assertTrue(cb("public static void foo()"));
-    assertTrue(cb("Foo.bar foo()"));
+    assertCurlyBrackets("public static void foo()");
+    assertCurlyBrackets("Foo.bar foo()");
     // impossible to know if method call or constructor declaration with regex. Could guess
     // by checking if first letter is capital letter as normal people have, but might be a
     // stretch
 //    assertTrue(c("Foo()")); 
-    assertTrue(cb("public Foo()"));
-    assertTrue(cb("Foo(Bar bar)"));
-    assertTrue(cb("Foo(Bar bar, Baz baz)"));
-    assertTrue(cb("public Foo(Bar bar, Baz baz)"));
-    assertTrue(cb("@Foo.Bar Foo foo()"));
-    assertTrue(cb("void foo()"));
-    assertTrue(cb("void _foo()"));
-    // assertTrue(cb("void möebius()")); // not now
-    assertTrue(cb("void foo() throws Bar"));
-    assertTrue(cb("void foo() throws Bar, Baz"));
-    assertTrue(cb("void foo() throws _Bar.Baz"));
-    assertTrue(cb("void foo()throws Bar,Bat.Man "));
-    assertTrue(cb("Bar foo(Baz baz, Bat.Man batman)"));
-    assertTrue(cb("<T> Bar foo(T t)"));
-    assertTrue(cb("void abstractMethod()"));
-    assertTrue(cb("public myabstract foo()"));
+    assertCurlyBrackets("public Foo()");
+    assertCurlyBrackets("Foo(Bar bar)");
+    assertCurlyBrackets("Foo(Bar bar, Baz baz)");
+    assertCurlyBrackets("public Foo(Bar bar, Baz baz)");
+    assertCurlyBrackets("@Foo.Bar Foo foo()");
+    assertCurlyBrackets("void foo()");
+    assertCurlyBrackets("void _foo()");
+    // assertCurlyBrackets("void möebius()")); // not now
+    assertCurlyBrackets("void foo() throws Bar");
+    assertCurlyBrackets("void foo() throws Bar, Baz");
+    assertCurlyBrackets("void foo() throws _Bar.Baz");
+    assertCurlyBrackets("void foo()throws Bar,Bat.Man ");
+    assertCurlyBrackets("Bar foo(Baz baz, Bat.Man batman)");
+    assertCurlyBrackets("<T> Bar foo(T t)");
+    assertCurlyBrackets("void abstractMethod()");
+    assertCurlyBrackets("public myabstract foo()");
 
     assertFalse(cb("public static int = foo()"));
     assertFalse(cb("new foo()"));
@@ -103,14 +102,14 @@ public class LineEvaluatorTest {
 
   @Test
   public void testCurlyBracketClassIntfEnumDeclaration() {
-    assertTrue(cb("public static class Foo"));
-    assertTrue(cb("public static class Foo implements Bar.Baz"));
-    assertTrue(cb("protected abstract class Foo extends Bar"));
-    assertTrue(cb("protected abstract class Foo extends Bar implements Baz"));
-    assertTrue(cb("interface Foo"));
-    assertTrue(cb("private interface Foo implements Bar"));
-    assertTrue(cb("enum Foo"));
-    assertTrue(cb("enum _Foo"));
+    assertCurlyBrackets("public static class Foo");
+    assertCurlyBrackets("public static class Foo implements Bar.Baz");
+    assertCurlyBrackets("protected abstract class Foo extends Bar");
+    assertCurlyBrackets("protected abstract class Foo extends Bar implements Baz");
+    assertCurlyBrackets("interface Foo");
+    assertCurlyBrackets("private interface Foo implements Bar");
+    assertCurlyBrackets("enum Foo");
+    assertCurlyBrackets("enum _Foo");
 
     assertFalse(cb("fakeenum Foo"));
     assertFalse(cb("enumfake Foo"));
@@ -123,27 +122,27 @@ public class LineEvaluatorTest {
 
   @Test
   public void testCurlyBracketIfWhileEtc() {
-    assertTrue(cb(" if (true)"));
-    assertTrue(cb("} else if (true)"));
-    assertTrue(cb("if (true) "));
-    assertTrue(cb("if(true) "));
-    assertTrue(cb("\twhile (something) "));
-    assertTrue(cb(" else if (true)"));
-    assertTrue(cb("} else if (true)"));
-    assertTrue(cb("\tfor (int i = 0; i < 100; i++)"));
-    assertTrue(cb("synchronized (foo)"));
-    assertTrue(cb(" synchronized(foo())"));
-    assertTrue(cb("switch(foo)"));
+    assertCurlyBrackets(" if (true)");
+    assertCurlyBrackets("} else if (true)");
+    assertCurlyBrackets("if (true) ");
+    assertCurlyBrackets("if(true) ");
+    assertCurlyBrackets("\twhile (something) ");
+    assertCurlyBrackets(" else if (true)");
+    assertCurlyBrackets("} else if (true)");
+    assertCurlyBrackets("\tfor (int i = 0; i < 100; i++)");
+    assertCurlyBrackets("synchronized (foo)");
+    assertCurlyBrackets(" synchronized(foo())");
+    assertCurlyBrackets("switch(foo)");
     
     assertFalse(cb("_if (Foo foo)"));
   }
 
   @Test
   public void testCurlyBracketParameterlessKeywords() {
-    assertTrue(cb(" do"));
-    assertTrue(cb("else "));
-    assertTrue(cb("finally"));
-    assertTrue(cb("try"));
+    assertCurlyBrackets(" do");
+    assertCurlyBrackets("else ");
+    assertCurlyBrackets("finally");
+    assertCurlyBrackets("try");
 
     assertFalse(cb(" dont"));
     assertFalse(cb("_else "));
@@ -151,26 +150,26 @@ public class LineEvaluatorTest {
 
   @Test
   public void testColonMisc() {
-    assertTrue(co("case 0"));
-    assertTrue(co("case Foo.BAR"));
-    assertTrue(co("case _Foo.BAR"));
-    assertTrue(co("case \"foo\""));
+    assertColon("case 0");
+    assertColon("case Foo.BAR");
+    assertColon("case _Foo.BAR");
+    assertColon("case \"foo\"");
     // assertTrue(k("case \"foo:bar\"")); // not going to that hell hole, no thanks
-    assertTrue(co("default"));
-    assertTrue(co("  default"));
+    assertColon("default");
+    assertColon("  default");
   }
   
   @Test
   public void testBrackets() {
-    assertTrue(br("if"));
-    assertTrue(br(" if"));
-    assertTrue(br("else if"));
-    assertTrue(br("} else if"));
-    assertTrue(br("while"));
-    assertTrue(br("for"));
-    assertTrue(br("synchronized"));
-    assertTrue(br("catch"));
-    assertTrue(br("switch"));
+    assertBrackets("if");
+    assertBrackets(" if");
+    assertBrackets("else if");
+    assertBrackets("} else if");
+    assertBrackets("while");
+    assertBrackets("for");
+    assertBrackets("synchronized");
+    assertBrackets("catch");
+    assertBrackets("switch");
 
     assertFalse(br("if ("));
     assertFalse(br("if ()"));
@@ -180,45 +179,53 @@ public class LineEvaluatorTest {
 
   @Test
   public void testNoneMatch() {
-    assertTrue(nl(""));
-    assertTrue(nl(" "));
-    assertTrue(nl("\t"));
-    assertTrue(nl("//CAPS"));
-    assertTrue(nl("   //foo"));
-    assertTrue(nl("}"));
-    assertTrue(nl("@Test"));
-    assertTrue(nl("@Foo.Bar"));
-    assertTrue(nl("@Ignore(\"becauseWhyNot\")"));
-    assertTrue(nl(" if (true) {"));
-    assertTrue(nl("\tfor (int i = 0;;i++) {"));
-    assertTrue(nl("while(isFoo()){"));
-    assertTrue(nl("new foo();"));
-    assertTrue(nl("String s = \"endOfLine;\".toString();"));
-    assertTrue(nl("case Foo.BAR:"));
-    assertTrue(nl("case Foo.BAR: return;"));
-    assertTrue(nl("default:"));
-    assertTrue(nl("default: return;"));
-    assertTrue(nl("return Foo.Bar.foo(\"foo\", bar, new Foo());"));
-    assertTrue(nl("return \"foo\";"));
+    assertNewLine("");
+    assertNewLine(" ");
+    assertNewLine("\t");
+    assertNewLine("//CAPS");
+    assertNewLine("   //foo");
+    assertNewLine("}");
+    assertNewLine("@Test");
+    assertNewLine("@Foo.Bar");
+    assertNewLine("@Ignore(\"becauseWhyNot\")");
+    assertNewLine(" if (true) {");
+    assertNewLine("\tfor (int i = 0;;i++) {");
+    assertNewLine("while(isFoo()){");
+    assertNewLine("new foo();");
+    assertNewLine("String s = \"endOfLine;\".toString();");
+    assertNewLine("case Foo.BAR:");
+    assertNewLine("case Foo.BAR: return;");
+    assertNewLine("default:");
+    assertNewLine("default: return;");
+    assertNewLine("return Foo.Bar.foo(\"foo\", bar, new Foo());");
+    assertNewLine("return \"foo\";");
   }
-
-  private boolean sc(String string) {
-    return Action.SEMICOLON.equals(LineEvaluator.getAction(string));
+  
+  private void assertSemiColon(String string) {
+    assertEquals(Action.SEMICOLON, LineEvaluator.getAction(string));
+  }
+  
+  private void assertNewLine(String string) {
+    assertEquals(Action.NEW_LINE, LineEvaluator.getAction(string));
+  }
+  
+  private void assertCurlyBrackets(String string) {
+    assertEquals(Action.CURLY_BRACKETS, LineEvaluator.getAction(string));
+  }
+  
+  private void assertBrackets(String string) {
+    assertEquals(Action.BRACKETS, LineEvaluator.getAction(string));
+  }
+  
+  private void assertColon(String string) {
+    assertEquals(Action.COLON, LineEvaluator.getAction(string));
   }
 
   private boolean cb(String string) {
     return Action.CURLY_BRACKETS.equals(LineEvaluator.getAction(string));
   }
-
-  private boolean co(String string) {
-    return Action.COLON.equals(LineEvaluator.getAction(string));
-  }
   
   private boolean br(String string) {
     return Action.BRACKETS.equals(LineEvaluator.getAction(string));
-  }
-
-  private boolean nl(String string) {
-    return Action.NEW_LINE.equals(LineEvaluator.getAction(string));
   }
 }
